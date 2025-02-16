@@ -1,7 +1,14 @@
 "use client";  // This tells Next.js this is a client-side component
 
+console.log("Backend URL:", process.env.NEXT_PUBLIC_BACKEND_URL);
+
+
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
+
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const uploadUrl = `${backendUrl}/upload/`;
+console.log("Uploading to:", uploadUrl);
 
 export default function FileUpload() {
   const [file, setFile] = useState<File | null>(null);
@@ -26,10 +33,10 @@ const handleUpload = async () => {
   formData.append("file", file);  // ✅ Key must match FastAPI
 
   try {
-    const response = await fetch("https://so-algorithm-keh0ay60d-aspacesys-projects.vercel.app/", {
-      method: "POST",
-      body: formData,  // ✅ Sends file as FormData
-    });
+  const response = await fetch(`${backendUrl}/upload/`, {  // ✅ Correct way to use env variable
+    method: "POST",
+    body: formData,  // ✅ Sends file as FormData
+  });
 
     if (!response.ok) {
       const errorText = await response.text();
