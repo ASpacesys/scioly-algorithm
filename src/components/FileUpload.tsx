@@ -62,11 +62,11 @@ const handleUpload = async () => {
         onClick={handleUpload}
         className="px-4 py-2 bg-blue-500 text-white rounded-md"
       >
-        Upload File
+        Upload File (.xlsx)
       </button>
       {downloadLink && (
         <a href={downloadLink} download="team_assignments.xlsx" className="text-blue-600">
-          Download Output File
+          Generated Roster
         </a>
       )}
     </div>
